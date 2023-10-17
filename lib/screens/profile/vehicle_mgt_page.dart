@@ -68,21 +68,23 @@ class _VehicleManagementPageState extends State<VehicleManagementPage>
                           SliverToBoxAdapter(
                             child: Column(
                               children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
+                                OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
                                       vertical: 16.0,
-                                      horizontal: 24.0,
+                                      horizontal: 16.0,
                                     ),
+                                    side: const BorderSide(
+                                        color: kAppPrimaryColor),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(12),
                                     ),
                                     elevation: 0,
                                   ),
-                                  onPressed: () async {
-                                    NavigationUtils.goTo(
-                                        context, AddVehicleDetailsPage());
-                                  },
+                                  onPressed: () => NavigationUtils.goTo(
+                                    context,
+                                    AddVehicleDetailsPage(),
+                                  ),
                                   child: const Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [

@@ -70,16 +70,19 @@ class _ShipmentPageState extends State<ShipmentPage>
               requests == null
                   ? const ShimmerWidget(type: ShimmerType.shipment)
                   : requests.isEmpty
-                      ? const Center(
-                          child: Text('No new requests yet'),
+                      ? RefreshIndicator(
+                          onRefresh: refreshData,
+                          child: ListView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            children: const [
+                              Center(
+                                child: Text('No new requests yet'),
+                              ),
+                            ],
+                          ),
                         )
                       : RefreshIndicator(
-                          onRefresh: () async {
-                            Provider.of<HomeViewModel>(
-                              context,
-                              listen: false,
-                            ).refreshData();
-                          },
+                          onRefresh: refreshData,
                           child: ListView.builder(
                             itemCount: requests.length,
                             itemBuilder: (context, index) {
@@ -111,16 +114,19 @@ class _ShipmentPageState extends State<ShipmentPage>
               deliveries == null
                   ? const ShimmerWidget(type: ShimmerType.shipment)
                   : deliveries.isEmpty
-                      ? const Center(
-                          child: Text('No new requests yet'),
+                      ? RefreshIndicator(
+                          onRefresh: refreshData,
+                          child: ListView(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            children: const [
+                              Center(
+                                child: Text('No accepted requests yet'),
+                              ),
+                            ],
+                          ),
                         )
                       : RefreshIndicator(
-                          onRefresh: () async {
-                            Provider.of<HomeViewModel>(
-                              context,
-                              listen: false,
-                            ).refreshData();
-                          },
+                          onRefresh: refreshData,
                           child: ListView.builder(
                             itemCount: deliveries.length,
                             itemBuilder: (context, index) {
@@ -130,10 +136,12 @@ class _ShipmentPageState extends State<ShipmentPage>
                             },
                           ),
                         ),
-              const Center(
+              const Align(
+                alignment: Alignment.topCenter,
                 child: Text('No completed requests yet'),
               ),
-              const Center(
+              const Align(
+                alignment: Alignment.topCenter,
                 child: Text('No ongoing requests yet'),
               ),
             ],
@@ -145,4 +153,11 @@ class _ShipmentPageState extends State<ShipmentPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  Future<void> refreshData() async {
+    Provider.of<HomeViewModel>(
+      context,
+      listen: false,
+    ).refreshData();
+  }
 }

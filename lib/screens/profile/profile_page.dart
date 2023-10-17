@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:rexofarm/screens/auth/login_page.dart';
 import 'package:rexofarm/screens/profile/change_password_page.dart';
 import 'package:rexofarm/screens/profile/vehicle_mgt_page.dart';
+import 'package:rexofarm/screens/profile/verify_profile_page.dart';
 import 'package:rexofarm/utilities/alert_utils.dart';
 import 'package:rexofarm/utilities/constants.dart';
 import 'package:rexofarm/utilities/navigation_utils.dart';
@@ -140,7 +141,9 @@ class ProfilePage extends StatelessWidget with AlertUtils {
                 fileName: 'tick-circle.png',
                 title: 'Verify profile',
                 subtitle: 'Complete KYC to verify profile',
-                onPressed: () {},
+                onPressed: () {
+                  NavigationUtils.goTo(context, const VerifyProfilePage());
+                },
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 18),

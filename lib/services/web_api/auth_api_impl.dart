@@ -234,6 +234,8 @@ class AuthApiImpl implements AuthApi {
       return apiResponse;
     }
 
+    print("Response - "+response.body);
+
     if (response.statusCode == 200 || response.statusCode == 201) {
       apiResponse = ApiResponse.completed(token: token);
     } else {
